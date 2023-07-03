@@ -1,6 +1,7 @@
 function baseURL(){
   // Proxy cho keystone
-  return "http://localhost:3001/admin/api"
+  return "http://localhost:3001/admin/api";
+  // return `https://be.creta.vn/admin/api`;
 }
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -16,8 +17,8 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/student.ico' },
-      { rel: 'apple-touch-icon', size: '180x180', href: '/student.png' },
+      { rel: 'icon', type: 'image/x-icon', href: '/creta.ico' },
+      { rel: 'apple-touch-icon', size: '180x180', href: '/creta.png' },
       { rel: 'stylesheet',  href:"https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" },
       { rel: 'stylesheet', href:"https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css"},
     ],
@@ -27,17 +28,19 @@ export default {
       { src:"https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" },
       { src:"https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js" },
       { src: "https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-vi_VN.min.js"},
-      { src: "https://use.fontawesome.com/releases/v5.15.4/js/all.js"}
+      { src: "https://use.fontawesome.com/releases/v5.15.4/js/all.js"},
+      { src: "https://momentjs.com/downloads/moment.min.js"}
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    // '@fortawesome/fontawesome-free/css/all.css'
+    '@fortawesome/fontawesome-free/css/all.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    // '~/plugins/graphql.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -109,5 +112,5 @@ export default {
   server: {
     host: '0.0.0.0',
     port: 3000
-  }
+  },
 }
