@@ -1,11 +1,7 @@
 function baseURL(){
-  // Proxy cho keystone
-  // return "http://192.168.1.4:3001/admin/api";
-  return "http://demo1.creta.vn:3000/admin/api";
-  // return `https://be.creta.vn/admin/api`;
+  return "http://localhost:3001/admin/api";
 }
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'ERP-CRETA',
     htmlAttrs: {
@@ -45,8 +41,6 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    // '~/plugins/graphql.js',
-    // { src: '~/plugins/modal.js', mode: 'client' },
     { src: '~/plugins/bootstrap-vue.js', mode: 'client' }
   ],
 

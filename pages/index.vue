@@ -2,15 +2,26 @@
     <div class="container">
         <b-button
             variant="primary"
+            @click="alertMessage"
         >Hello</b-button>
     </div>
 </template>
 
 <script>
+import {allTaskMains} from '~/plugins/task.js'
 export default {
     name: 'IndexPage',
     methods: {
-
+        alertMessage(){
+            allTaskMains(this.$apolloProvider.defaultClient)
+            .then(data => {
+                console.log(data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            console.log("Hello From ERP Creta");
+        }
     }
 }
 </script>

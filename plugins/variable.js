@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import { fragmentVariable } from './fragments';
-
 export async function getVariableByItem (client, item){
     return new Promise((resolve, reject) => {
         client.query({
@@ -68,7 +67,6 @@ export async function createVariable(client, variable){
                 ${fragmentVariable}
             `
         }).then(data => {
-            // console.log(data);
             resolve(data.data.createVariable);
         }).catch(err => {
             reject(err);
