@@ -1,9 +1,9 @@
 function baseURL(){
-  return "http://localhost:3001/admin/api";
+  return process.env.BASE_URL;
 }
 export default {
   head: {
-    title: 'ERP-CRETA',
+    title: process.env.APP_NAME,
     htmlAttrs: {
       lang: 'en'
     },
@@ -16,16 +16,8 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/creta.ico' },
       { rel: 'apple-touch-icon', size: '180x180', href: '/creta.png' },
-      // { rel: 'stylesheet',  href:"https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" },
-      // { rel: 'stylesheet', href:"https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css"},
     ],
     script: [
-      // { src:"https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js" },
-      // { src:"https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" },
-      // { src:"https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" },
-      // { src:"https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js" },
-      // { src: "https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-vi_VN.min.js"},
-      // { src: "https://use.fontawesome.com/releases/v5.15.4/js/all.js"},
       { src: "https://momentjs.com/downloads/moment.min.js"}
     ]
   },
@@ -33,9 +25,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@fortawesome/fontawesome-free/css/all.css',
-    // Import Bootstrap CSS
     'bootstrap/dist/css/bootstrap.css',
-    // Optionally import Bootstrap Vue CSS (if you want to use BootstrapVue's custom components)
     'bootstrap-vue/dist/bootstrap-vue.css'
   ],
 
@@ -111,7 +101,7 @@ export default {
     ]
   },
   server: {
-    host: '0.0.0.0',
-    port: 3000
+    host: process.env.HOST,
+    port: process.env.PORT
   },
 }
