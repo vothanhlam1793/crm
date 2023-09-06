@@ -1,5 +1,5 @@
-export default function(context){
-    context.app.hello = function(){
-        console.log("Hello");
-    }
+export default function(context, inject){
+    inject('hello', function(){
+        console.log("Hello", context);
+    });
 }

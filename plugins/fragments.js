@@ -54,3 +54,10 @@ fragment fVariable on Variable {
 	id key value item idItem slug
 }
 `
+
+export const fragmentCustomer = `
+fragment fCustomer on Customer {
+    id code phones {id number} name birthday note tags {id title type itemS}
+    type address sex
+}
+`

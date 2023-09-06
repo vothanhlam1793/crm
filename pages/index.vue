@@ -21,6 +21,12 @@ export default {
                 console.log(err);
             })
             console.log("Hello From ERP Creta");
+            this.$hello();
+            this.$getAllCustomers().then(data => {
+                console.log(data);
+            }).catch (err => {
+                console.log(err);
+            });
         }
     }
 }
