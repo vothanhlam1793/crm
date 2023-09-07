@@ -8,9 +8,15 @@
         />
         <b-button
             variant="primary"
-            @click="getToken"
+            @click="$getToken()"
         >
             tìm kiếm
+        </b-button>
+        <b-button
+            variant="primary"
+            @click="getToken"
+        >
+            check
         </b-button>
 
     </div>
@@ -27,7 +33,8 @@ export default {
     },
     methods: {
         async getToken() {
-            this.$getToken();
+            // this.$getToken();
+            console.log(await this.$getCustomers(50, 100));
         },
     },
 };

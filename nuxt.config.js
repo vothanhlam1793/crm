@@ -35,6 +35,7 @@ export default {
     '~/plugins/test.js',
     '~/plugins/customer.js',
     '~/plugins/kiotviet.js',
+    '~/plugins/extends.js',
   ],
   router: {
     middleware: ['auth'] // Sử dụng middleware 'auth' trên các trang cần bảo vệ
@@ -113,6 +114,10 @@ export default {
     {
       path: '/api/kiotviet', // Tiền tố URL để xác định yêu cầu sẽ được chuyển tiếp
       handler: '~/serverMiddleware/kiotviet.js', // Đường dẫn đến tệp máy chủ proxy
-    }
+    },
+    {
+      path: '/api/publickiotviet', // Tiền tố URL để xác định yêu cầu sẽ được chuyển tiếp
+      handler: '~/serverMiddleware/publickiotviet.js', // Đường dẫn đến tệp middleware cho API publickiotviet
+    },
   ],
 }
