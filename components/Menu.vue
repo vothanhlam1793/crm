@@ -5,6 +5,9 @@
       <li class="nav-item">
         <a class="nav-link" href="/">Trang chủ</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/request">Thêm khách</a>
+      </li>
       <li class="nav-item ml-5">
         <LoginButton></LoginButton>
       </li>

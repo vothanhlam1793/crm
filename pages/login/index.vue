@@ -1,15 +1,15 @@
 <template>
-    <div class="container">
+    <div class="container mt-5">
         <form @submit.prevent="userLogin">
             <div class="form-group">
                 <label>Tên đăng nhập</label>
                 <input class="form-control" type="text" v-model="login.username" />
             </div>
-            <div class="form-group">
+            <div class="form-group my-3">
                 <label>Mật khẩu</label>
                 <input class="form-control" type="password" v-model="login.password" />
             </div>
-            <div class="text-center">
+            <div class=" form-group text-center my-3">
                 <button class="btn btn-success" type="submit">Đăng nhập</button>
             </div>
         </form>

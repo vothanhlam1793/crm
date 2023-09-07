@@ -1,17 +1,16 @@
 <template>
     <div class="row">
         <div class="col">
-
+            {{ customer }}
         </div>
     </div>
 </template>
 <script>
-// import Index from '~/components/Filter/Table/Index.vue';
 export default {
     components: {
 
     },
-    props: [],
+    props: ['customer'],
     data(){
         return {
 

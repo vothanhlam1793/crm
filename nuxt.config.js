@@ -34,8 +34,11 @@ export default {
     { src: '~/plugins/bootstrap-vue.js', mode: 'client' },
     '~/plugins/test.js',
     '~/plugins/customer.js',
+    '~/plugins/kiotviet.js',
   ],
-
+  router: {
+    middleware: ['auth'] // Sử dụng middleware 'auth' trên các trang cần bảo vệ
+  },
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -106,4 +109,10 @@ export default {
     host: process.env.HOST,
     port: process.env.PORT
   },
+  serverMiddleware: [
+    {
+      path: '/api/kiotviet', // Tiền tố URL để xác định yêu cầu sẽ được chuyển tiếp
+      handler: '~/serverMiddleware/kiotviet.js', // Đường dẫn đến tệp máy chủ proxy
+    }
+  ],
 }

@@ -2,28 +2,32 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Tổng quan</h1>
+                <h1>Thêm khách</h1>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <Squal />
+                <Request />
             </div>
         </div>
     </div>
 </template>
 <script>
-// import {allTaskMains} from '~/plugins/task.js'
-import Squal from '~/components/Main/Squal.vue';
+import Request from '~/components/Main/Request.vue';
 export default {
     name: 'IndexPage',
     layout: "app",
     components: {
-        Squal
+        Request
+    },
+    data(){
+        return {
+            customers: []
+        }
     },
     methods: {
-        alertMessage(){
-            this.$getAllCustomersByUser().then(datav => {
+        getAllCustomers(){
+            this.$getAllCustomers().then(datav => {
                 console.log(datav);
             }).catch(err => {
                 console.log(err);
@@ -31,7 +35,7 @@ export default {
         }
     },
     mounted(){
-        this.alertMessage();
+        this.getAllCustomers();
     }
 }
 </script>
