@@ -1,6 +1,15 @@
 import Cookies from "js-cookie";
 export default function (context, inject) {
   const getToken = async () => {
+    var token = Cookies.get("token");
+    try {
+      token = JSON.parse(token);
+      if(token.date + token.expires_in*1000 > (new Date()).getTime()){
+        return token;
+      }
+    } catch (e) {
+      console.log("RENEW - TOKEN");
+    }
     const formData = new FormData();
     formData.append("scopes", "PublicApi.Access");
     formData.append("grant_type", "client_credentials");
@@ -21,13 +30,28 @@ export default function (context, inject) {
           },
         }
       );
-      console.log(response.data);
+      // console.log(response.data);
+      response.data.date = (new Date()).getTime() - 5000;
+      Cookies.set('token', JSON.stringify(response.data));
       // Xử lý phản hồi ở đây
+      return response.data;
     } catch (error) {
       console.error("Lỗi khi lấy token:", error);
     }
   };
 
+  const getCustomers = async (pageSize=20, currentItem=1) => {
+    var token = await getToken();
+    const response = await context.$axios.get(`/api/publickiotviet/customers?pageSize=${pageSize}&currentItem=${currentItem}&includeTotal=true`, {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`,
+        Retailer: `cretasolu`,
+      },
+    });
+    return response.data;
+  }
+
   // Inject hàm getToken vào context
   inject("getToken", getToken);
+  inject("getCustomers", getCustomers);
 }
