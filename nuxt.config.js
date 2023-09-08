@@ -36,6 +36,7 @@ export default {
     '~/plugins/customer.js',
     '~/plugins/kiotviet.js',
     '~/plugins/extends.js',
+    { src: '~/plugins/moment.js', ssr: false },
   ],
   router: {
     middleware: ['auth'] // Sử dụng middleware 'auth' trên các trang cần bảo vệ

@@ -42,7 +42,7 @@ export default function (context, inject) {
 
   const getCustomers = async (pageSize=20, currentItem=1) => {
     var token = await getToken();
-    const response = await context.$axios.get(`/api/publickiotviet/customers?pageSize=${pageSize}&currentItem=${currentItem}`, {
+    const response = await context.$axios.get(`/api/publickiotviet/customers?pageSize=${pageSize}&currentItem=${currentItem}&includeTotal=true`, {
       headers: {
         Authorization: `Bearer ${token.access_token}`,
         Retailer: `cretasolu`,
