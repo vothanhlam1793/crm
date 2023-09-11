@@ -42,7 +42,7 @@ export default function (context, inject) {
 
   const getCustomers = async (pageSize=20, currentItem=1) => {
     var token = await getToken();
-    const response = await context.$axios.get(`/api/publickiotviet/customers?pageSize=${pageSize}&currentItem=${currentItem}&includeTotal=true`, {
+    const response = await context.$axios.get(`/api/publickiotviet/customers?includeCustomerGroup=true&pageSize=${pageSize}&currentItem=${currentItem}&includeTotal=true`, {
       headers: {
         Authorization: `Bearer ${token.access_token}`,
         Retailer: `cretasolu`,
@@ -51,7 +51,65 @@ export default function (context, inject) {
     return response.data;
   }
 
+  const getInvoices = async (pageSize=20, currentItem = 1) => {
+    var token = await getToken();
+    const response = await context.$axios.get(`/api/publickiotviet/invoices?pageSize=${pageSize}&currentItem=${currentItem}`, {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`,
+        Retailer: `cretasolu`,
+      },
+    });
+    return response.data;
+  }
+
+  const getCustomerWithCodeKiotViet = async (code) => {
+    if(code == undefined){
+      alert("Vui lòng nhập code để tải thông tin");
+      return;
+    }
+    var token = await getToken();
+    const response = await context.$axios.get(`/api/publickiotviet/customers/code/${code}`, {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`,
+        Retailer: `cretasolu`,
+      },
+    });
+    return response.data;
+  }
+
+  const getInvoicesWithCustomerCodeKiotViet = async (code, pageSize=20, currentItem = 1) => {
+    if(code == undefined){
+      alert("Vui lòng nhập code để tải thông tin");
+      return;
+    }
+    var token = await getToken();
+    const response = await context.$axios.get(`/api/publickiotviet/invoices?customerCode=${code}&pageSize=${pageSize}&currentItem=${currentItem}`, {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`,
+        Retailer: `cretasolu`,
+      },
+    });
+    return response.data;
+  }
+
+  const getAllInvoicesWithCustomerCodeKiotViet = async (code) => {
+    if(code == undefined){
+      alert("Vui lòng nhập code để tải thông tin");
+      return;
+    }
+    var data = await getInvoicesWithCustomerCodeKiotViet(code, 100, 0);
+    var invoices = data.data;
+    for(var i = 0; i < data.total/100; i++){
+      var data1 = await getInvoicesWithCustomerCodeKiotViet(code, 100, 100*(i+1));
+      invoices = invoices.concat(data1.data);
+    }
+    return invoices;
+  };
   // Inject hàm getToken vào context
   inject("getToken", getToken);
   inject("getCustomers", getCustomers);
+  inject("getCustomerWithCodeKiotViet", getCustomerWithCodeKiotViet);
+  inject("getInvoicesWithCustomerCodeKiotViet", getInvoicesWithCustomerCodeKiotViet);
+  inject("getAllInvoicesWithCustomerCodeKiotViet", getAllInvoicesWithCustomerCodeKiotViet);
+  inject("getInvoices", getInvoices);
 }

@@ -61,3 +61,29 @@ fragment fCustomer on Customer {
     type address sex
 }
 `
+
+export const fragmentPhone = `
+fragment fPhone on Phone {
+    id number users { id name } customers {id code name}
+  } 
+`
+
+export const fragmentTag = `
+fragment fTag on Tag {
+	id type title description itemS  
+}
+`
+
+export const fragmentInvoice = `
+fragment fInvoice on Invoice {
+    id code createdDate customer {id code} 
+    description invoiceDetails purchaseDate 
+    total status statusValue
+}
+`
+export const fragmentProduct = `
+fragment fProduct on Product {
+	id code barCode name fullName description 
+    tags { id title itemS type } price minQuantity maxQuantity
+}
+`

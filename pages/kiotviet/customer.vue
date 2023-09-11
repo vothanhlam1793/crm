@@ -1,18 +1,16 @@
 <template>
   <div>
     <div>
-      <b-button
-        v-for="(page, index) in pages"
-        :key="index"
-        @click="getCustomers(page)"
-        class="mx-1"
-        :variant="page == pageIndex ? 'success' : 'secondary'"
-      >
-        {{ page + 1 }}
-      </b-button>
+      <b-pagination
+        v-model="pageIndex"
+        :total-rows="totalCustomer"
+        :per-page="pageSize"
+        @change="getCustomers"
+        pills 
+      ></b-pagination>
     </div>
     <div>
-      <h4>Tổng khách: {{ totalCustomer }} - Trang: {{ pageIndex + 1 }}</h4>
+      <h4>Tổng khách: {{ totalCustomer }} - Trang: {{ pageIndex }}</h4>
       <b-table
         :items="customers"
         :fields="fields"
@@ -33,6 +31,7 @@
                 <div>
                     <b-button
                         variant="warning"
+                        @click="createCustomer(data.item)"
                     >
                         Sync
                     </b-button>
@@ -97,10 +96,27 @@ export default {
     },
   },
   methods: {
+    createCustomer: async function (customer){
+      // this.$createCustomer(customer);
+      // console.log(customer);
+      // console.log(await this.$getTags({title: "DINH"}));
+      // var data = await this.$getCustomerWithCodeKiotViet(customer.code);
+      var invoices  = await this.$getAllInvoicesWithCustomerCodeKiotViet(customer.code);
+      // console.log("KIOTVIET:", data);
+      // console.log("GROUPS", customer.groups.split("|"));
+      // var tags = this.$getArrayTag(customer.groups.split("|"), "Customer");
+      var customer = await this.$getCustomerWithCode(customer.code);
+      if(customer.id == undefined){
+        // Chua tao
+        customer = await this.$createCustomer(customer);
+      }
+      var invoice = await this.$createInvoice(invoices[0], customer);
+      console.log("INVOICES:", invoice);
+    },
     async getCustomers(pageIndex) {
       this.isBusy = true;
       if (pageIndex != undefined) {
-        this.currentItem = pageIndex * this.pageSize;
+        this.currentItem = (pageIndex -1) * this.pageSize;
         this.pageIndex = pageIndex;
       } else {
         this.currentItem = this.pageIndex * this.pageSize;
